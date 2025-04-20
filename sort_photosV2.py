@@ -9,7 +9,6 @@ photos_folder = os.path.join(base_folder, "Photos")  # All your photos
 reference_folder = r'C:\Users\micro\OneDrive\Desktop\test ing my programs files\Reference'  # Your reference images path
 output_folder = os.path.join(base_folder, "output")  # Output folder to store sorted photos
 
-# Create output folder if it doesn't exist
 os.makedirs(output_folder, exist_ok=True)
 
 # Load reference encodings with all faces
@@ -62,11 +61,11 @@ for photo_file in os.listdir(photos_folder):
             matched_person = find_best_match(face_encoding, reference_encodings)
             
             if matched_person:  # If a match is found
-                # Create a folder for the matched person in the output folder
+              
                 person_folder = os.path.join(output_folder, matched_person)
                 os.makedirs(person_folder, exist_ok=True)
 
-                # Create the new photo name with the matched person's name
+              
                 new_photo_name = f"{matched_person}_{photo_file}"
                 new_photo_path = os.path.join(person_folder, new_photo_name)
 
@@ -79,7 +78,7 @@ for photo_file in os.listdir(photos_folder):
 
 print("Photos sorted and renamed successfully!")
 
-# Ask user to review and move files to the reference folders
+
 user_input = input("Do you want to move the sorted photos to the reference folders? (yes/no): ").strip().lower()
 
 if user_input == 'yes':
@@ -94,9 +93,8 @@ if user_input == 'yes':
                 os.makedirs(reference_person_folder, exist_ok=True)
                 shutil.move(photo_path, os.path.join(reference_person_folder, photo_file))
 
-            # Optionally, you can remove the empty person folder from output
             os.rmdir(person_folder)
 
     print("Files have been moved to the reference folders.")
 else:
-    print("You chose not to move the files to the reference folders. The output files remain in the output folder.")
+    print(" The output files remain in the output folder.")
